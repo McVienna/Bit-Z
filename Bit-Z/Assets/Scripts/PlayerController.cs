@@ -12,11 +12,15 @@ public class PlayerController : MonoBehaviour {
 
     public Rigidbody2D rig_bod;
 
+    Animator anim;
+
     
     // Use this for initialization
 	void Start ()
     {
         rig_bod = GetComponent<Rigidbody2D>();
+
+        anim = GetComponent<Animator>();
 
     }
 
@@ -27,6 +31,8 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
         float move = Input.GetAxis("Horizontal");
+
+        anim.SetFloat("Speed", Mathf.Abs(move));
 
         rig_bod.velocity = new Vector2(move * maxSpeed, rig_bod.velocity.y);
 
