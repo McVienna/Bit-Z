@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float maxSpeed = 10f;
-    public float jumpSpeed = 0.1f;
-    public float yFloor;
+    public Vector2 jumpForce = new Vector2(0, 300);
+
 
     bool facingRight = true;
 
@@ -39,9 +39,10 @@ public class PlayerController : MonoBehaviour {
             Flip();
         }
 
-        if(Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space"))
         {
             rig_bod.AddForce(new Vector2(0, 300));
+
         }
 
     }
