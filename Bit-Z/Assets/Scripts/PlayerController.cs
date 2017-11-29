@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour {
         rig_bod = GetComponent<Rigidbody2D>();
 
         anim = GetComponent<Animator>();
-
     }
 
     /// <summary>
