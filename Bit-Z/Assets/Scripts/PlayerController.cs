@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour {
             Flip();
         }
 
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("w"))
         {
             rig_bod.AddForce(new Vector2(0, 300));
 
