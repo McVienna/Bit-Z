@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour {
 	void Start ()
     {
         Instantiate(m_PLayerPrefab);
-        Instantiate(m_EnemyPrefab);
+        //Instantiate(m_EnemyPrefab);
         Instantiate(m_Background);
         Instantiate(m_MainCamera);
 
