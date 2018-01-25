@@ -33,16 +33,18 @@ public class Shooting : MonoBehaviour {
                 print("rechts schießen");
             }
         }
-
-	}
+        
+    }
 
     void ShootLeft()
     {
-        Instantiate(bullet, posLeft, Quaternion.identity);
+        var Bullet = Instantiate(bullet, posLeft, Quaternion.identity) as GameObject;
+        Destroy(Bullet, 1);
     }
 
     void ShootRight()
     {
-        Instantiate(bullet, posRight, Quaternion.identity);
+        var Bullet = Instantiate(bullet, posRight, Quaternion.identity) as GameObject;
+        Destroy(Bullet, 1);
     }
 }

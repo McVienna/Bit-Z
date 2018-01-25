@@ -7,16 +7,10 @@ public class PlayerController : MonoBehaviour {
     public float maxSpeed = 10f;
     public Vector2 jumpForce = new Vector2(0, 300);
     public Rigidbody2D rig_bod;
-    //public GameObject Bullet;
     public LayerMask ground;
     public static int dirFacing = 2;
-
-
-    //private Transform myTrans;
-    //private Vector2 myDirection;
-    //private float ShootForce = 0.1f;
-
-
+    public int life = 3;
+    private GameObject Bullet;
     bool facingRight = true;
 
     Animator anim;
@@ -27,7 +21,7 @@ public class PlayerController : MonoBehaviour {
     {
         rig_bod = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        //myTrans = transform;
+
 
     }
 
@@ -45,11 +39,6 @@ public class PlayerController : MonoBehaviour {
 
         rig_bod.velocity = new Vector2(move * maxSpeed, rig_bod.velocity.y);
 
-        //var screenPos = Camera.main.WorldToScreenPoint(myTrans.position);
-        //print("screenPos: " + screenPos);
-        //myDirection = new Vector2(screenPos.x, screenPos.y);
-        //print("myDirection: " + myDirection);
-
         if (move > 0 && !facingRight)
         {
             Flip();
@@ -66,11 +55,12 @@ public class PlayerController : MonoBehaviour {
             Jump();     
         }
 
-        //if(Input.GetKeyDown("space"))
-        //{
-        //    //Shoot();
-        //    print("space");
-        //}
+        if(life == 0)
+        {
+            //Destroy(this.gameObject);
+            Time.timeScale = 0;
+            Application.Quit();
+        }
     }
 
     void Flip()
@@ -106,34 +96,20 @@ public class PlayerController : MonoBehaviour {
         else
         {
             rig_bod.AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
-            //rig_bod.AddForce(new Vector2(0, 300));
         }
     }
 
-    //void Shoot()
-    //{
-    //    var bullet = Instantiate(Bullet, myTrans.position, myTrans.rotation) as GameObject;
-
-    //    if(bullet)
-    //    {
-    //        print("in bullet drin");
-    //        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-
-    //        var rigid = bullet.GetComponent<Rigidbody2D>();
-
-    //        rigid.AddForce(myDirection * ShootForce, ForceMode2D.Impulse);
-    //        //rigid.AddForce(Vector3.forward * 1000);
-
-    //        Destroy(bullet, 5.0f);
-    //    }
-
-    //    else
-    //    {
-    //        Debug.LogError("nix Bullet");
-    //    }
-
-
-    //}
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            life--;
+            Debug.Log(life);
+        }
+        if(collision.gameObject.tag == "Bullet")
+        {
+            Physics2D.IgnoreLayerCollision(8, 11);
+        }
+    }
 }
 
