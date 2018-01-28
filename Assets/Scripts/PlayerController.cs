@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float maxSpeed = 10f;
-    public Vector2 jumpForce = new Vector2(0, 300);
+    public float jumpForce = 10f;
     public Rigidbody2D rig_bod;
     public LayerMask ground;
     public static int dirFacing = 2;
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-            rig_bod.AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
+            rig_bod.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
     }
 

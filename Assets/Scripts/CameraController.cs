@@ -5,12 +5,14 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
     public GameObject Player;
+    public GameObject Enemy;
     public Vector2 velocity;
     public float smoothTimex;
     public float smoothTimey;
     public bool bounds;
     public Vector3 minCameraPos;
     public Vector3 maxCameraPos;
+    public float spawnTime = 3f;
     //public float RunBack;
 
     private float offset;
@@ -19,7 +21,7 @@ public class CameraController : MonoBehaviour {
     void Awake ()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-
+        //InvokeRepeating("SpawnEnemy", spawnTime, spawnTime);
         //offset = transform.position - Player.transform.position;
     }
 	
@@ -59,11 +61,30 @@ public class CameraController : MonoBehaviour {
                                  Mathf.Clamp(transform.position.y, minCameraPos.y, maxCameraPos.y),
                                  Mathf.Clamp(transform.position.z, minCameraPos.z, maxCameraPos.z));
 
-            Debug.Log("Offset: " + offset);
-            Debug.Log("Transform Pos: " + transform.position);
-            Debug.Log("Camera: " + GetComponent<Camera>().transform.position.x);
-            Debug.Log("minCamera: " + minCameraPos.x);
+            //Debug.Log("Offset: " + offset);
+            //Debug.Log("Transform Pos: " + transform.position);
+            //Debug.Log("Camera: " + GetComponent<Camera>().transform.position.x);
+            //Debug.Log("minCamera: " + minCameraPos.x);
         }
 
+    }
+
+    void SpawnEnemy()
+    {
+        Instantiate(Enemy, new Vector3(Random.Range(transform.position.x + offset, maxCameraPos.x), 0, 0),
+                                       Quaternion.identity);
+        //Physics2D.IgnoreCollision(GetComponent<Camera>().GetComponent<BoxCollider2D>(), Enemy.GetComponent<Collider2D>(), true);
+
+        //Debug.Log("Camera Collider: " + GetComponent<Collider2D>());
+        //Debug.Log("Enemy Collider: " + Enemy.GetComponent<Collider2D>());
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Physics2D.IgnoreLayerCollision(0, 10);
+            //Physics2D.IgnoreCollision(GetComponent<Camera>().GetComponent<Collider2D>(), Enemy.GetComponent<Collider2D>(), true);
+        }
     }
 }
