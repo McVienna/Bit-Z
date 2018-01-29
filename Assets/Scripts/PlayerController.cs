@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -9,8 +10,11 @@ public class PlayerController : MonoBehaviour {
     public Rigidbody2D rig_bod;
     public LayerMask ground;
     public static int dirFacing = 2;
-    public int life = 3;
+    public float Health;
+    public Slider Healthbar;
+
     private GameObject Bullet;
+    private float _currentHealth;
     bool facingRight = true;
 
     Animator anim;
@@ -21,6 +25,11 @@ public class PlayerController : MonoBehaviour {
     {
         rig_bod = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        //Healthbar = GetComponent<Slider>();
+
+        _currentHealth = Health;
+        Healthbar.maxValue = Health;
+        Healthbar.value = Health;
 
 
     }
@@ -55,12 +64,17 @@ public class PlayerController : MonoBehaviour {
             Jump();     
         }
 
-        if(life == 0)
+        if(_currentHealth == 0 || Healthbar.value == 0)
         {
             //Destroy(this.gameObject);
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
+            Debug.Break();
             Application.Quit();
         }
+
+        Debug.Log("Health: " + Health);
+        Debug.Log("Healthbar-Health: " + Healthbar.value);
+
     }
 
     void Flip()
@@ -103,13 +117,18 @@ public class PlayerController : MonoBehaviour {
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            life--;
-            Debug.Log(life);
+            TakeDamage(1);
         }
         if(collision.gameObject.tag == "Bullet")
         {
             Physics2D.IgnoreLayerCollision(8, 11);
         }
+    }
+
+    void TakeDamage(float amount)
+    {
+        _currentHealth -= amount;
+        Healthbar.value = _currentHealth;
     }
 }
 

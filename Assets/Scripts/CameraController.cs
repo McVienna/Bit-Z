@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour {
     void Awake ()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-        //InvokeRepeating("SpawnEnemy", spawnTime, spawnTime);
+        InvokeRepeating("SpawnEnemy", spawnTime, spawnTime);
         //offset = transform.position - Player.transform.position;
     }
 	
