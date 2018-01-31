@@ -42,15 +42,15 @@ public class CameraController : MonoBehaviour {
 
         if (bounds)
         {       
-            if ((PlayerController.dirFacing == 2) && (minCameraPos.x >= -39.21f) )
+            if ((PlayerController.dirFacing == 2) && (minCameraPos.x >= -41.4f) )
             {
                 
                 minCameraPos.x = GetComponent<Camera>().transform.position.x;
             }
 
-            if(minCameraPos.x < -39.21f)
+            if(minCameraPos.x < -41.4f)
             {
-                minCameraPos.x = -39.21f;
+                minCameraPos.x = -41.4f;
             }
             else if(minCameraPos.x >= maxCameraPos.x)
             {

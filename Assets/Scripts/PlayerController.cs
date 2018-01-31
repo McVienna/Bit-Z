@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour {
     public Rigidbody2D rig_bod;
     public LayerMask ground;
     public static int dirFacing = 2;
-    public float Health;
+    public int Health;
     public Slider Healthbar;
 
+
+
     private GameObject Bullet;
-    private float _currentHealth;
+    public int _currentHealth;
     bool facingRight = true;
 
     Animator anim;
@@ -25,7 +27,6 @@ public class PlayerController : MonoBehaviour {
     {
         rig_bod = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        //Healthbar = GetComponent<Slider>();
 
         _currentHealth = Health;
         Healthbar.maxValue = Health;
@@ -64,7 +65,10 @@ public class PlayerController : MonoBehaviour {
             Jump();     
         }
 
-        if(_currentHealth == 0 || Healthbar.value == 0)
+
+
+
+        if(_currentHealth == 0)
         {
             //Destroy(this.gameObject);
             //Time.timeScale = 0;
@@ -125,7 +129,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void TakeDamage(float amount)
+    void TakeDamage(int amount)
     {
         _currentHealth -= amount;
         Healthbar.value = _currentHealth;

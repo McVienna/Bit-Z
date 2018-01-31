@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -9,25 +11,30 @@ public class GameManager : MonoBehaviour {
     public GameObject m_MainCamera;
     public GameObject m_Background;
     public GameObject m_HUD;
+    public Text level;
+    public Sprite[] HealthDosen;
+    public Image Dose;
 
-	// Use this for initialization
-	void Start ()
+    private PlayerController player;
+
+    // Use this for initialization
+    void Start ()
     {
-        Instantiate(m_PLayerPrefab);
+        
+        //Instantiate(m_PLayerPrefab);
         Instantiate(m_Background);
-        Instantiate(m_MainCamera);
-        Instantiate(m_HUD);
+        //Instantiate(m_MainCamera);
+        //Instantiate(m_HUD);
 
-        //m_HUD.transform.SetParent(GameObject.FindGameObjectWithTag("UI").transform, false);
-        //m_PLayerPrefab.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform, false);
-	}
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+        var lvlName = SceneManager.GetActiveScene().name;
+        level.text = lvlName;
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		 if(!m_PLayerPrefab)
-        {
-            Destroy(this.gameObject);
-        }
+        Dose.sprite = HealthDosen[(player._currentHealth) -1];
 	}
 }
