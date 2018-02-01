@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour {
     public LayerMask ground;
     public static int dirFacing = 2;
     public int Health;
-    public Slider Healthbar;
+    public GameOver gameOver;
+    //public Slider Healthbar;
 
 
 
@@ -29,8 +30,8 @@ public class PlayerController : MonoBehaviour {
         anim = GetComponent<Animator>();
 
         _currentHealth = Health;
-        Healthbar.maxValue = Health;
-        Healthbar.value = Health;
+        //Healthbar.maxValue = Health;
+        //Healthbar.value = Health;
 
 
     }
@@ -65,19 +66,14 @@ public class PlayerController : MonoBehaviour {
             Jump();     
         }
 
-
-
-
-        if(_currentHealth == 0)
+        if (_currentHealth <= 0)
         {
-            //Destroy(this.gameObject);
-            //Time.timeScale = 0;
-            Debug.Break();
-            Application.Quit();
+            _currentHealth = 0;
+            Death();
         }
 
-        Debug.Log("Health: " + Health);
-        Debug.Log("Healthbar-Health: " + Healthbar.value);
+        Debug.Log("Health: " + _currentHealth);
+        //Debug.Log("Healthbar-Health: " + Healthbar.value);
 
     }
 
@@ -132,7 +128,17 @@ public class PlayerController : MonoBehaviour {
     void TakeDamage(int amount)
     {
         _currentHealth -= amount;
-        Healthbar.value = _currentHealth;
+        //Healthbar.value = _currentHealth;
+    }
+
+    void Death()
+    {
+        //Destroy(this.gameObject);
+        //Time.timeScale = 0;
+
+            gameOver.isDead = true;
+            //Debug.Break();
+            //Application.Quit();
     }
 }
 

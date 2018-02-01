@@ -52,11 +52,11 @@ public class CameraController : MonoBehaviour {
             {
                 minCameraPos.x = -41.4f;
             }
-            else if(minCameraPos.x >= maxCameraPos.x)
-            {
-                minCameraPos.x = maxCameraPos.x;
-            }
-            
+            //else if (minCameraPos.x >= maxCameraPos.x)
+            //{
+            //    minCameraPos.x = maxCameraPos.x;
+            //}
+
             transform.position = new Vector3(Mathf.Clamp(transform.position.x + offset, minCameraPos.x, maxCameraPos.x),
                                  Mathf.Clamp(transform.position.y, minCameraPos.y, maxCameraPos.y),
                                  Mathf.Clamp(transform.position.z, minCameraPos.z, maxCameraPos.z));

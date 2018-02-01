@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     public Sprite[] HealthDosen;
     public Image Dose;
 
+    private PauseMenu pauseMenu;
     private PlayerController player;
 
     // Use this for initialization
@@ -35,6 +36,6 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Dose.sprite = HealthDosen[(player._currentHealth) -1];
+        Dose.sprite = HealthDosen[player._currentHealth -1];
 	}
 }
