@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour {
     public GameObject m_Background;
     public GameObject m_HUD;
     public Text level;
-    public Sprite[] HealthDosen;
-    public Image Dose;
+    public Sprite[] HealthArr;
+    public Image Life;
 
     private PauseMenu pauseMenu;
     private PlayerController player;
@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Dose.sprite = HealthDosen[player._currentHealth -1];
+        Life.sprite = HealthArr[player._currentHealth];
+        Debug.Log(HealthArr[player._currentHealth]);
 	}
 }
